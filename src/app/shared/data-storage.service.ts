@@ -1,14 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
 import { map, tap } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataSorageService {
   constructor(
     private http: HttpClient,
     private RecipeService: RecipeService,
+    private authService: AuthService,
   ) {}
 
   storeRecipes() {
@@ -37,7 +39,9 @@ export class DataSorageService {
             };
           });
         }),
-        tap((recipes) => this.RecipeService.setRecipes(recipes)),
+        tap((recipes) => {
+          this.RecipeService.setRecipes(recipes);
+        }),
       );
   }
 }
