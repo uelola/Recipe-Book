@@ -21,7 +21,7 @@ export class AuthComponent implements OnDestroy {
   error: string | null = null; // has no real used because used in the previous message setup
   @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective | undefined; // used for programatic creation of alert component, and also for dynamic component loading in general
 
-  private closeSub: Subscription; // used to store the subscription to the close event of the alert component, so that we can unsubscribe when the component is destroyed, to avoid memory leaks
+  private closeSub!: Subscription; // used to store the subscription to the close event of the alert component, so that we can unsubscribe when the component is destroyed, to avoid memory leaks
 
   constructor(
     private authService: AuthService,
