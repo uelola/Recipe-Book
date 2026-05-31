@@ -43,6 +43,7 @@ export class AuthComponent implements OnDestroy {
     let authObs: Observable<AuthResponseData>;
 
     this.isLoading = true;
+
     if (this.isLoginMode) {
       authObs = this.authService.login(email, password);
     } else {
@@ -82,7 +83,9 @@ export class AuthComponent implements OnDestroy {
       this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
     const hostViewContainerRef = this.alertHost!.viewContainerRef;
     hostViewContainerRef.clear(); // clear the container before creating the component, to avoid multiple alerts stacking up
+
     const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+
     componentRef.instance.message = message; // pass the error message to the alert component instance
     this.closeSub = componentRef.instance.close.subscribe(() => {
       this.closeSub?.unsubscribe(); // unsubscribe from the close event when the alert is closed, to avoid memory leaks
